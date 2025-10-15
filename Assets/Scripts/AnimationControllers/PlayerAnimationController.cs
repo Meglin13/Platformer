@@ -1,11 +1,6 @@
 using UnityEngine;
 
-[RequireComponent (typeof(Animator))]
-public class PlayerAnimationController : MonoBehaviour
+public class CharacterAnimator : MonoBehaviour
 {
-    private Player player;
-    void Start()
-    {
-        player = GetComponent<Player>();
-    }
+
 }

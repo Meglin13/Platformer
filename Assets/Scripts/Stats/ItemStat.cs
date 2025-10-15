@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 
+[Serializable]
 public class ItemStat : MonoBehaviour, IStat
 {
     private int currentValue = 0;

@@ -1,19 +1,15 @@
-using Entities.Interfaces;
-using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+/// <summary>
+/// Класс игрока, наследуемый от EntityScript. Управление и особая логика игрока.
+/// </summary>
 [RequireComponent(typeof(Rigidbody2D))]
-public class Player : MonoBehaviour, IDamageable
+public class Player : Entities.EntityScript
 {
-    [SerializeField] private Rigidbody2D rb;
-
     [Header("Stats")]
-    [SerializeField]
-    private HealthStat healthStat;
 
-    [SerializeField]
-    private ItemStat money = new ItemStat();
+    [SerializeField] private ItemStat money = new ItemStat();
     public ItemStat Money => money;
 
     [Header("Movement")]
@@ -27,28 +23,10 @@ public class Player : MonoBehaviour, IDamageable
     [SerializeField] private int maxJumpsInAir = 2;
     private int jumpsRemaining;
 
-    [Header("Ground Checking")]
-    [SerializeField] private float raycastDistance = 1f;
-    [SerializeField] private float rayStartOffset = 0.5f;
-    [SerializeField] private LayerMask layer;
-
-    // События
-    public Action OnFall = delegate { };
-    public Action OnJump = delegate { };
-    public Action OnMove = delegate { };
-
-    private readonly Vector2[] rayDirections = new Vector2[]
+    protected override void Awake()
     {
-        Vector2.down,                   // вниз
-        Vector2.left,                   // влево
-        Vector2.right,                  // вправо
-        new Vector2(-1, -1).normalized, // вниз-влево
-        new Vector2(1, -1).normalized   // вниз-вправо
-    };
+        base.Awake();
 
-    private void Awake()
-    {
-        rb = GetComponent<Rigidbody2D>();
         jumpsRemaining = maxJumpsInAir;
 
         money = new ItemStat();
@@ -68,6 +46,14 @@ public class Player : MonoBehaviour, IDamageable
     public void Move(InputAction.CallbackContext context)
     {
         horizontalMovement = context.ReadValue<Vector2>().x;
+
+        if (horizontalMovement != 0)
+        {
+            Vector3 scale = transform.localScale;
+            scale.x = Mathf.Abs(scale.x) * Mathf.Sign(horizontalMovement);
+            transform.localScale = scale;
+            OnMove?.Invoke();
+        }
     }
 
     public void Jump(InputAction.CallbackContext context)
@@ -76,6 +62,7 @@ public class Player : MonoBehaviour, IDamageable
         {
             Bounce(jumpPower);
             jumpsRemaining--;
+            TriggerJump();
         }
     }
 
@@ -83,44 +70,4 @@ public class Player : MonoBehaviour, IDamageable
     {
         rb.velocity = new Vector2(rb.velocity.x, bounceMultiplier);
     }
-
-    private bool CheckAnyDirection()
-    {
-        Vector2 rayStart = (Vector2)transform.position + Vector2.up * rayStartOffset;
-
-        foreach (Vector2 dir in rayDirections)
-        {
-            RaycastHit2D hit = Physics2D.Raycast(rayStart, dir, raycastDistance, layer);
-
-#if UNITY_EDITOR
-            Debug.DrawRay(rayStart, dir * raycastDistance, hit.collider ? Color.red : Color.green);
-#endif
-
-            if (hit.collider != null)
-                return true;
-        }
-
-        return false;
-    }
-
-    public void TakeDamage(int damage)
-    {
-        healthStat.ChangeValue(-damage);
-    }
-
-#if UNITY_EDITOR
-    private void OnDrawGizmos()
-    {
-        if (!rb) rb = GetComponent<Rigidbody2D>();
-        Gizmos.color = Color.green;
-
-        Vector2 rayStart = (Vector2)transform.position + Vector2.up * rayStartOffset;
-
-        foreach (Vector2 ray in rayDirections)
-        {
-            Gizmos.DrawLine(rayStart, rayStart + ray * raycastDistance);
-        }
-    }
-
-#endif
 }

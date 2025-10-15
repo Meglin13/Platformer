@@ -12,6 +12,8 @@ public class PatrolingScript : MonoBehaviour
     private bool waiting = false;
     private float waitTimer = 0f;
 
+    private bool isSpriteReversable = true;
+
     private void Start()
     {
         if (points.Length == 0)
@@ -45,13 +47,15 @@ public class PatrolingScript : MonoBehaviour
                 currentIndex = 0;
         }
 
-        // Разворот спрайта
-        Vector3 scale = transform.localScale;
-        if (targetPoint.position.x > transform.position.x)
-            scale.x = Mathf.Abs(scale.x);
-        else
-            scale.x = -Mathf.Abs(scale.x);
-        transform.localScale = scale;
+        if (isSpriteReversable)
+        {
+            Vector3 scale = transform.localScale;
+            if (targetPoint.position.x > transform.position.x)
+                scale.x = Mathf.Abs(scale.x);
+            else
+                scale.x = -Mathf.Abs(scale.x);
+            transform.localScale = scale; 
+        }
     }
 
     /// <summary>

@@ -1,12 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class SimpleResetScene : MonoBehaviour
 {
     [SerializeField]
-    GameObject player;
+    private Player player;
 
     private void Update()
     {
@@ -15,7 +12,13 @@ public class SimpleResetScene : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name);
+        if (collision.gameObject == player.gameObject)
+        {
+            UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name);
+        }
+        else
+        {
+            collision.gameObject.SetActive(false);
+        }
     }
-
 }
