@@ -3,10 +3,11 @@ using UnityEngine;
 public class PatrolingScript : MonoBehaviour
 {
     [Header("Patrol points")]
-    public Transform[] points; 
-    public float speed = 2f;   
+    public Transform[] points;
+
+    public float speed = 2f;
     public float waitTime = 1f;
-    public bool loop = true;   
+    public bool loop = true;
 
     private int currentIndex = 0;
     private bool waiting = false;
@@ -54,7 +55,7 @@ public class PatrolingScript : MonoBehaviour
                 scale.x = Mathf.Abs(scale.x);
             else
                 scale.x = -Mathf.Abs(scale.x);
-            transform.localScale = scale; 
+            transform.localScale = scale;
         }
     }
 

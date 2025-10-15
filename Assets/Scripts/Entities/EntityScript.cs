@@ -13,10 +13,12 @@ namespace Entities
         [SerializeField] protected Rigidbody2D rb;
         [SerializeField] protected SpriteRenderer spriteRenderer;
 
-        [SerializeField] private HealthStat healthStat;
+        [SerializeField] private HealthStat healthStat = new HealthStat();
+        public HealthStat Health => healthStat;
 
         [Header("Ground Checking")]
         [SerializeField] private float raycastDistance = 1f;
+
         [SerializeField] private float rayStartOffset = 0.5f;
         [SerializeField] private LayerMask layer;
 
@@ -31,6 +33,7 @@ namespace Entities
 
         // События
         public Action OnFall = delegate { };
+
         public Action OnTakeDamage = delegate { };
         public Action OnJump = delegate { };
         public Action OnMove = delegate { };
@@ -41,6 +44,8 @@ namespace Entities
         {
             rb = GetComponent<Rigidbody2D>();
             spriteRenderer = GetComponentInChildren<SpriteRenderer>();
+
+            OnDie += () => Die();
         }
 
         protected virtual void Update()
@@ -103,6 +108,8 @@ namespace Entities
             return false;
         }
 
+        private Coroutine damageFlashCoroutine;
+
         /// <summary>
         /// Получение урона
         /// </summary>
@@ -111,7 +118,11 @@ namespace Entities
         {
             healthStat.ChangeValue(-damage);
 
-            StartCoroutine(DamageFlashCoroutine());
+            if (damageFlashCoroutine != null)
+            {
+                StopCoroutine(damageFlashCoroutine);
+            }
+            damageFlashCoroutine = StartCoroutine(DamageFlashCoroutine());
 
             OnTakeDamage?.Invoke();
 
@@ -121,7 +132,13 @@ namespace Entities
             }
         }
 
+        protected void Die()
+        {
+            gameObject.SetActive(false);
+        }
+
 #if UNITY_EDITOR
+
         private void OnDrawGizmos()
         {
             if (!rb) rb = GetComponent<Rigidbody2D>();
@@ -134,7 +151,10 @@ namespace Entities
                 Gizmos.DrawLine(rayStart, rayStart + ray * raycastDistance);
             }
         }
+
 #endif
+
+        private Color originalColor = Color.clear;
 
         /// <summary>
         /// Корутин для отображения получения урона.
@@ -144,11 +164,27 @@ namespace Entities
         {
             if (spriteRenderer == null) yield break;
 
-            Color originalColor = spriteRenderer.color;
+            if (originalColor == Color.clear)
+            {
+                originalColor = spriteRenderer.color;
+            }
 
             spriteRenderer.color = Color.red;
             yield return new WaitForSeconds(0.2f);
             spriteRenderer.color = originalColor;
+        }
+
+        /// <summary>
+        /// Очистка событий
+        /// </summary>
+        protected virtual void OnDestroy()
+        {
+            Health.ClearEvents();
+            OnTakeDamage = null;
+            OnJump = null;
+            OnMove = null;
+            OnDie = null;
+            OnLand = null;
         }
     }
 }

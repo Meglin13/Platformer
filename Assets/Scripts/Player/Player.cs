@@ -8,18 +8,23 @@ using UnityEngine.InputSystem;
 public class Player : Entities.EntityScript
 {
     [Header("Stats")]
-
     [SerializeField] private ItemStat money = new ItemStat();
+
+    [SerializeField] private int stompDamage = 10;
+    public int StompDamage => stompDamage;
+
     public ItemStat Money => money;
 
     [Header("Movement")]
     [SerializeField] private float moveSpeed = 5f;
+
     public float limitVelocity = 100f;
 
     private float horizontalMovement;
 
     [Header("Jumping")]
     [SerializeField] private float jumpPower = 10f;
+
     [SerializeField] private int maxJumpsInAir = 2;
     private int jumpsRemaining;
 
@@ -30,6 +35,8 @@ public class Player : Entities.EntityScript
         jumpsRemaining = maxJumpsInAir;
 
         money = new ItemStat();
+
+        OnDie += () => SceneManager.Instance.ReloadCurrentScene();
     }
 
     private void Update()
@@ -61,13 +68,19 @@ public class Player : Entities.EntityScript
         if (context.performed && jumpsRemaining > 0)
         {
             Bounce(jumpPower);
-            jumpsRemaining--;
             TriggerJump();
+            jumpsRemaining--;
         }
     }
 
     public void Bounce(float bounceMultiplier)
     {
         rb.velocity = new Vector2(rb.velocity.x, bounceMultiplier);
+    }
+
+    protected override void OnDestroy()
+    {
+        base.OnDestroy();
+        Money.ClearEvents();
     }
 }

@@ -1,17 +1,20 @@
 using System.Collections;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.Events;
 
+/// <summary>
+/// Менеджер сцен
+/// </summary>
 public class SceneManager : MonoBehaviour
 {
     public static SceneManager Instance { get; private set; }
 
-    [Header("Настройки перехода")]
-    public CanvasGroup fadeCanvas;   
+    [Header("Fade")]
+    public CanvasGroup fadeCanvas;
+
     public float fadeDuration = 0.5f;
 
-    public UnityEvent OnSceneLoaded; 
+    public UnityEvent OnSceneLoaded;
 
     private bool isLoading = false;
 
@@ -24,11 +27,13 @@ public class SceneManager : MonoBehaviour
         }
 
         Instance = this;
-        DontDestroyOnLoad(gameObject);
+
+
+        OnSceneLoaded?.Invoke();
     }
 
     /// <summary>
-    /// Загрузить сцену по имени.
+    /// Загрузка сцены по имени.
     /// </summary>
     public void LoadScene(string sceneName)
     {
@@ -37,7 +42,7 @@ public class SceneManager : MonoBehaviour
     }
 
     /// <summary>
-    /// Загрузить сцену по индексу.
+    /// Загрузка сцены по индексу.
     /// </summary>
     public void LoadScene(int sceneIndex)
     {
@@ -45,11 +50,17 @@ public class SceneManager : MonoBehaviour
             StartCoroutine(LoadSceneRoutine(sceneIndex));
     }
 
+    /// <summary>
+    /// Перезагрузку текущей сцены
+    /// </summary>
     public void ReloadCurrentScene()
     {
         LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name);
     }
 
+    /// <summary>
+    /// Загрузка следующей сцены
+    /// </summary>
     public void LoadNextScene()
     {
         int nextIndex = UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex + 1;

@@ -1,9 +1,8 @@
 using UnityEngine;
-using System;
 
 namespace Entities
 {
-    [RequireComponent(typeof(AudioSource))]    
+    [RequireComponent(typeof(AudioSource))]
     public class EntitySoundController : MonoBehaviour
     {
         [SerializeField] private AudioSource audioSource;
@@ -11,6 +10,7 @@ namespace Entities
 
         [Header("Sound Clips")]
         [SerializeField] private AudioClip damageSound;
+
         [SerializeField] private AudioClip jumpSound;
         [SerializeField] private AudioClip deathSound;
         [SerializeField] private AudioClip landSound;

@@ -13,7 +13,21 @@ public class ColliderDamagerScript : MonoBehaviour
     {
         if (collision.gameObject.TryGetComponent(out IDamageable damageable) && collision.gameObject.layer != gameObject.layer)
         {
-            damageable.TakeDamage(damageAmount);
+            if (!IsCollisionFromTop(collision))
+            {
+                DamageEntity(damageable);
+            }
         }
+    }
+
+    private bool IsCollisionFromTop(Collision2D collision)
+    {
+        ContactPoint2D contact = collision.contacts[0];
+        return contact.normal.y < -0.5f;
+    }
+
+    private void DamageEntity(IDamageable damageable)
+    {
+        damageable.TakeDamage(damageAmount);
     }
 }

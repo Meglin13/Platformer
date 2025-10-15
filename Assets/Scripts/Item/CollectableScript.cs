@@ -5,11 +5,12 @@ using UnityEngine;
 /// </summary>
 [RequireComponent(typeof(CircleCollider2D))]
 [RequireComponent(typeof(AudioSource))]
-[RequireComponent (typeof(SpriteRenderer))]
+[RequireComponent(typeof(SpriteRenderer))]
 public class CollectableScript : MonoBehaviour, ICollectable
 {
     [Header("Components")]
     private AudioSource source;
+
     private CircleCollider2D circleCollider;
     private SpriteRenderer spriteRenderer;
 

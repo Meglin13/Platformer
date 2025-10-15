@@ -7,7 +7,7 @@ public class SimpleResetScene : MonoBehaviour
 
     private void Update()
     {
-        transform.position =  new Vector2(player.transform.position.x, transform.position.y);
+        transform.position = new Vector2(player.transform.position.x, transform.position.y);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
