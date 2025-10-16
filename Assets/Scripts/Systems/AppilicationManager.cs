@@ -1,5 +1,8 @@
 using UnityEngine;
 
+/// <summary>
+/// Менеджер приложения
+/// </summary>
 public class ApplicationManager : MonoBehaviour
 {
     [SerializeField] private float currentTime = 1;

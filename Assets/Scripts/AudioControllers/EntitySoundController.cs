@@ -60,16 +60,5 @@ namespace Entities
                 audioSource.PlayOneShot(landSound);
             }
         }
-
-        private void OnDestroy()
-        {
-            if (entityScript)
-            {
-                entityScript.OnTakeDamage -= PlayDamageSound;
-                entityScript.OnJump -= PlayJumpSound;
-                entityScript.OnDie -= PlayDeathSound;
-                entityScript.OnLand -= PlayLandSound;
-            }
-        }
     }
 }

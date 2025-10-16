@@ -33,7 +33,6 @@ namespace Entities
 
         // События
         public Action OnFall = delegate { };
-
         public Action OnTakeDamage = delegate { };
         public Action OnJump = delegate { };
         public Action OnMove = delegate { };
@@ -52,6 +51,19 @@ namespace Entities
         {
             CheckFallState();
             CheckMovementState();
+        }
+
+        /// <summary>
+        /// Очистка событий при унитожении
+        /// </summary>
+        protected virtual void OnDestroy()
+        {
+            Health.ClearEvents();
+            OnTakeDamage = null;
+            OnJump = null;
+            OnMove = null;
+            OnDie = null;
+            OnLand = null;
         }
 
         private bool wasFalling = false;
@@ -174,17 +186,6 @@ namespace Entities
             spriteRenderer.color = originalColor;
         }
 
-        /// <summary>
-        /// Очистка событий
-        /// </summary>
-        protected virtual void OnDestroy()
-        {
-            Health.ClearEvents();
-            OnTakeDamage = null;
-            OnJump = null;
-            OnMove = null;
-            OnDie = null;
-            OnLand = null;
-        }
+
     }
 }

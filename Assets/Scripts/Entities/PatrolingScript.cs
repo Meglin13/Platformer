@@ -59,6 +59,7 @@ public class PatrolingScript : MonoBehaviour
         }
     }
 
+#if UNITY_EDITOR
     /// <summary>
     /// Визуализация пути через гизмо
     /// </summary>
@@ -91,5 +92,6 @@ public class PatrolingScript : MonoBehaviour
 
         Gizmos.color = Color.cyan;
         Gizmos.DrawWireSphere(transform.position, 0.15f);
-    }
+    } 
+#endif
 }

@@ -8,14 +8,16 @@ using UnityEngine.Events;
 [RequireComponent(typeof(Rigidbody2D))]
 public class Triggercript : MonoBehaviour
 {
-    [SerializeField]
-    private UnityEvent unityEvent;
+    protected Player Player;
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    public UnityEvent playerEvent;
+
+    protected virtual void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.TryGetComponent(out Player player))
         {
-            unityEvent?.Invoke();
+            Player = player;
+            playerEvent?.Invoke();
         }
     }
 }

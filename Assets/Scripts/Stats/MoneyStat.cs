@@ -5,7 +5,7 @@ using UnityEngine;
 /// Класс лоя счета предметов
 /// </summary>
 [Serializable]
-public class ItemStat : IStat
+public class MoneyStat : IStat
 {
     [SerializeField]
     private int currentValue = 0;

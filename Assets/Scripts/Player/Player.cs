@@ -8,12 +8,12 @@ using UnityEngine.InputSystem;
 public class Player : Entities.EntityScript
 {
     [Header("Stats")]
-    [SerializeField] private ItemStat money = new ItemStat();
+    [SerializeField] private MoneyStat money = new MoneyStat();
 
     [SerializeField] private int stompDamage = 10;
     public int StompDamage => stompDamage;
 
-    public ItemStat Money => money;
+    public MoneyStat Money => money;
 
     [Header("Movement")]
     [SerializeField] private float moveSpeed = 5f;
@@ -34,7 +34,7 @@ public class Player : Entities.EntityScript
 
         jumpsRemaining = maxJumpsInAir;
 
-        money = new ItemStat();
+        money = new MoneyStat();
 
         OnDie += () => SceneManager.Instance.ReloadCurrentScene();
     }

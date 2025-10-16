@@ -9,11 +9,6 @@ public class SceneManager : MonoBehaviour
 {
     public static SceneManager Instance { get; private set; }
 
-    [Header("Fade")]
-    public CanvasGroup fadeCanvas;
-
-    public float fadeDuration = 0.5f;
-
     public UnityEvent OnSceneLoaded;
 
     private bool isLoading = false;
@@ -28,8 +23,12 @@ public class SceneManager : MonoBehaviour
 
         Instance = this;
 
-
         OnSceneLoaded?.Invoke();
+    }
+
+    private void OnDestroy()
+    {
+        OnSceneLoaded = null;
     }
 
     /// <summary>
@@ -74,8 +73,6 @@ public class SceneManager : MonoBehaviour
     {
         isLoading = true;
 
-        yield return StartCoroutine(Fade(1));
-
         AsyncOperation asyncLoad = UnityEngine.SceneManagement.SceneManager.LoadSceneAsync(sceneName);
         asyncLoad.allowSceneActivation = false;
 
@@ -88,8 +85,6 @@ public class SceneManager : MonoBehaviour
             yield return null;
         }
 
-        yield return StartCoroutine(Fade(0));
-
         isLoading = false;
         OnSceneLoaded?.Invoke();
     }
@@ -97,8 +92,6 @@ public class SceneManager : MonoBehaviour
     private IEnumerator LoadSceneRoutine(int sceneIndex)
     {
         isLoading = true;
-
-        yield return StartCoroutine(Fade(1));
 
         AsyncOperation asyncLoad = UnityEngine.SceneManagement.SceneManager.LoadSceneAsync(sceneIndex);
         asyncLoad.allowSceneActivation = false;
@@ -112,26 +105,7 @@ public class SceneManager : MonoBehaviour
             yield return null;
         }
 
-        yield return StartCoroutine(Fade(0));
-
         isLoading = false;
         OnSceneLoaded?.Invoke();
-    }
-
-    private IEnumerator Fade(float targetAlpha)
-    {
-        if (fadeCanvas == null) yield break;
-
-        float startAlpha = fadeCanvas.alpha;
-        float time = 0f;
-
-        while (time < fadeDuration)
-        {
-            time += Time.deltaTime;
-            fadeCanvas.alpha = Mathf.Lerp(startAlpha, targetAlpha, time / fadeDuration);
-            yield return null;
-        }
-
-        fadeCanvas.alpha = targetAlpha;
     }
 }

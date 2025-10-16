@@ -20,6 +20,11 @@ public class EnemyStompDamage : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Проверка на атаку сверху
+    /// </summary>
+    /// <param name="collision">Коллизия</param>
+    /// <param name="player">Игрок</param>
     private void CheckStompDamage(Collision2D collision, Player player)
     {
         ContactPoint2D contact = collision.contacts[0];
