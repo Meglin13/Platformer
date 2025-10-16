@@ -2573,6 +2573,30 @@ PrefabInstance:
       propertyPath: m_Name
       value: Exit
       objectReference: {fileID: 0}
+    - target: {fileID: 6012935319294687910, guid: eeb19352bc43458488abf7ccca47ae32, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6012935319294687910, guid: eeb19352bc43458488abf7ccca47ae32, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6012935319294687910, guid: eeb19352bc43458488abf7ccca47ae32, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 6437421380436593178}
+    - target: {fileID: 6012935319294687910, guid: eeb19352bc43458488abf7ccca47ae32, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: QuitGame
+      objectReference: {fileID: 0}
+    - target: {fileID: 6012935319294687910, guid: eeb19352bc43458488abf7ccca47ae32, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: ApplicationManager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 6012935319294687910, guid: eeb19352bc43458488abf7ccca47ae32, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
