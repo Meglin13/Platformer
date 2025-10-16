@@ -4,6 +4,8 @@
 
 [![Watch the video](https://img.youtube.com/vi/xpJHAvA-qdw/hqdefault.jpg)](https://www.youtube.com/embedxpJHAvA-qdw)
 
+[Установочный файл](https://github.com/Meglin13/Platformer/releases/tag/Alpha)
+
 ### Игрок
 
 Игрок играет за персонажа, цель которого - дойти до финиша, минуя препятствия и врагов, при этом собрав монеты, разбросанные по уровню.
