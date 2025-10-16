@@ -26,11 +26,8 @@ public class EnemyStompDamage : MonoBehaviour
 
         if (contact.normal.y < -0.5f && player.GetComponent<Rigidbody2D>().velocity.y < 0)
         {
-            if (TryGetComponent(out IDamageable damageable))
-            {
-                damageable.TakeDamage(player.StompDamage);
-                player.Bounce(bouncePower);
-            }
+            damageable.TakeDamage(player.StompDamage);
+            player.Bounce(bouncePower);
         }
     }
 }

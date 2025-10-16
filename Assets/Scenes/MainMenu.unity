@@ -2144,6 +2144,38 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -3.0399933
       objectReference: {fileID: 0}
+    - target: {fileID: 7206398832924061720, guid: f5fba5a8db367c34891cc860166831c2, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7206398832924061720, guid: f5fba5a8db367c34891cc860166831c2, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7206398832924061720, guid: f5fba5a8db367c34891cc860166831c2, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 855520561}
+    - target: {fileID: 7206398832924061720, guid: f5fba5a8db367c34891cc860166831c2, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7206398832924061720, guid: f5fba5a8db367c34891cc860166831c2, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: LoadScene
+      objectReference: {fileID: 0}
+    - target: {fileID: 7206398832924061720, guid: f5fba5a8db367c34891cc860166831c2, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: SceneManager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 7206398832924061720, guid: f5fba5a8db367c34891cc860166831c2, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7206398832924061720, guid: f5fba5a8db367c34891cc860166831c2, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 7825375905309162438, guid: f5fba5a8db367c34891cc860166831c2, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -4065,6 +4097,10 @@ PrefabInstance:
     - target: {fileID: 1417925115611175302, guid: f5fba5a8db367c34891cc860166831c2, type: 3}
       propertyPath: m_Name
       value: LevelIcon (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1417925115611175302, guid: f5fba5a8db367c34891cc860166831c2, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2327426568634783044, guid: f5fba5a8db367c34891cc860166831c2, type: 3}
       propertyPath: m_AnchoredPosition.x

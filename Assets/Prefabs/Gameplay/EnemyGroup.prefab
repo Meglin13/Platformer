@@ -25,7 +25,7 @@ Transform:
   m_GameObject: {fileID: 1330184588151478400}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -0.62000203, y: 0.2, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -46,7 +46,7 @@ GameObject:
   - component: {fileID: 7907747977206038604}
   - component: {fileID: 4986928828646487655}
   - component: {fileID: 7746903199894664241}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -128,7 +128,7 @@ Animator:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1392185520047984495}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 22100000, guid: 5db5de2103bb57b4da20286d77e481b9, type: 2}
   m_CullingMode: 0
@@ -172,7 +172,8 @@ GameObject:
   - component: {fileID: 8548330948157923139}
   - component: {fileID: 441641438130485144}
   - component: {fileID: 7446736483550727971}
-  m_Layer: 0
+  - component: {fileID: 5754179175390479828}
+  m_Layer: 7
   m_Name: Enemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -278,6 +279,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damageAmount: 10
+  bounceForce: 10
+  canDamageAbove: 1
 --- !u!114 &4286619117165496993
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -343,7 +346,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1952272810051937788}
-  m_BodyType: 0
+  m_BodyType: 1
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
@@ -375,6 +378,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bouncePower: 5
+--- !u!114 &5754179175390479828
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1952272810051937788}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d682fca080dc234bbe864437b85aa37, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bouncePower: 10
 --- !u!1 &3634261668265169480
 GameObject:
   m_ObjectHideFlags: 0

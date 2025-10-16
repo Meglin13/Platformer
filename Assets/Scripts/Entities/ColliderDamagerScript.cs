@@ -9,13 +9,19 @@ public class ColliderDamagerScript : MonoBehaviour
     [SerializeField]
     private int damageAmount = 1;
 
+    [SerializeField] private float bounceForce = 5f;
+    [SerializeField] private bool damageFromTop = false;
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.TryGetComponent(out IDamageable damageable) && collision.gameObject.layer != gameObject.layer)
+        if (collision.gameObject.TryGetComponent(out Player player))
         {
-            if (!IsCollisionFromTop(collision))
+            bool isTopCollision = IsCollisionFromTop(collision);
+
+            if ((damageFromTop) || (!damageFromTop && !isTopCollision))
             {
-                DamageEntity(damageable);
+                DamageEntity(player);
+                player.Bounce(bounceForce);
             }
         }
     }
