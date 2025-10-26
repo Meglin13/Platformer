@@ -149,23 +149,6 @@ namespace Entities
             gameObject.SetActive(false);
         }
 
-#if UNITY_EDITOR
-
-        private void OnDrawGizmos()
-        {
-            if (!rb) rb = GetComponent<Rigidbody2D>();
-            Gizmos.color = Color.green;
-
-            Vector2 rayStart = (Vector2)transform.position + Vector2.up * rayStartOffset;
-
-            foreach (Vector2 ray in rayDirections)
-            {
-                Gizmos.DrawLine(rayStart, rayStart + ray * raycastDistance);
-            }
-        }
-
-#endif
-
         private Color originalColor = Color.clear;
 
         /// <summary>
@@ -186,6 +169,19 @@ namespace Entities
             spriteRenderer.color = originalColor;
         }
 
+#if UNITY_EDITOR
+        private void OnDrawGizmos()
+        {
+            if (!rb) rb = GetComponent<Rigidbody2D>();
+            Gizmos.color = Color.green;
 
+            Vector2 rayStart = (Vector2)transform.position + Vector2.up * rayStartOffset;
+
+            foreach (Vector2 ray in rayDirections)
+            {
+                Gizmos.DrawLine(rayStart, rayStart + ray * raycastDistance);
+            }
+        }
+#endif
     }
 }

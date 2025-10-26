@@ -48,11 +48,7 @@ public class HealthStat : IStat
     /// Изменение кол-ва здоровья
     /// </summary>
     /// <param name="amount">Значение, на которое изменяется текущее значение здоровья</param>
-    public void ChangeValue(int amount)
-    {
-        CurrentValue += amount;
-        OnValueChanged?.Invoke();
-    }
+    public void ChangeValue(int amount) => CurrentValue += amount;
 
     /// <summary>
     /// Очистка событий
